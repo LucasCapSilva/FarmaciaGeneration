@@ -2,15 +2,21 @@
 
 ## endpoints
 
-### marcas
+### marca
 
 endpoint = http://localhost:8080/marcas
 verbo = post
+
+{
+    "descricao":"Natura"
+}
 
 ### categoria
 
 http://localhost:8080/categoria
 verbo = post
+
+#### objeto na body de request
 {
     "descricao":"Cosmeticos"
 }
@@ -20,6 +26,7 @@ verbo = post
 http://localhost:8080/produtos
 verbo = post
 
+#### objeto na body de request
 {
     "nomeProduto":"Batom Natura",
     "preco":2.00,
