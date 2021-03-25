@@ -1,9 +1,15 @@
 package br.com.famacia.farmaciageneration.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -32,8 +38,11 @@ public class Produto {
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
-	private Categoria categoria;
-
+	private Marca marca;
+	
+	@ManyToMany(mappedBy = "produtos", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"descricao","produtos"})
+	private List<Categoria> categoriaProduto = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -59,14 +68,6 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
 	public int getQuantidade() {
 		return quantidade;
 	}
@@ -81,6 +82,22 @@ public class Produto {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	public List<Categoria> getCategoriaProduto() {
+		return categoriaProduto;
+	}
+
+	public void setCategoriaProduto(List<Categoria> categoriaProduto) {
+		this.categoriaProduto = categoriaProduto;
 	}
 
 	

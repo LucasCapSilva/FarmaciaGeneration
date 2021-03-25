@@ -1,13 +1,17 @@
 package br.com.famacia.farmaciageneration.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,9 +30,14 @@ public class Categoria {
 	@Size(min =5, max =100)
 	private String descricao;
 	
-	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("categoria")
-	private List <Produto> produto;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(
+	  name = "categoriaProduto", 
+	  joinColumns = @JoinColumn(name = "categoria_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "produto_id"))
+	@JsonIgnoreProperties({"nomeProduto","preco","quantidade","ativo","marca","categoriaProduto"})
+	private List<Produto> produtos = new ArrayList<>();
 
 
 	public long getId() {
@@ -49,13 +58,15 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
-	public List<Produto> getProduto() {
-		return produto;
+	public List<Produto> getProdutos() {
+		return produtos;
 	}
 
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
+
+
 	
 	
 }
