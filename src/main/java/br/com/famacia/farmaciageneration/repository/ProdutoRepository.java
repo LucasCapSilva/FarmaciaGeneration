@@ -20,6 +20,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 	@Query(value = "SELECT * FROM blog_pessoal.tb_produto where ativo = :ativo", nativeQuery = true)
 	public List<Produto> findAllByAtivo(@Param("ativo") boolean ativo);	
 	
-	@Query(value = "select * from tb_produto inner join tb_categoria on  tb_categoria.id = tb_produto.categoria_id where tb_categoria.descricao = :categoria", nativeQuery = true)
-	public List<Produto> findAllProdutoByCategoriaDecicao(@Param("categoria") String categoria);
+	@Query(value = "select * from tb_produto inner join tb_marca on  tb_marca.id = tb_produto.marca_id where tb_marca.descricao = :marca", nativeQuery = true)
+	public List<Produto> findAllProdutoByCategoriaDecicao(@Param("marca") String marca);
 }

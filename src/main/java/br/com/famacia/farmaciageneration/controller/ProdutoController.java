@@ -60,9 +60,9 @@ public class ProdutoController {
 	
 
 	
-	@GetMapping("/categoria/{categoria}")
-	public ResponseEntity<List<Produto>> GetAllProdutoByCategoriaDecicao(@PathVariable String categoria){
-		return ResponseEntity.ok(repository.findAllProdutoByCategoriaDecicao(categoria));
+	@GetMapping("/marca/{marca}")
+	public ResponseEntity<List<Produto>> GetAllProdutoByCategoriaDecicao(@PathVariable String marca){
+		return ResponseEntity.ok(repository.findAllProdutoByCategoriaDecicao(marca));
 	}
 	
 	@PostMapping
