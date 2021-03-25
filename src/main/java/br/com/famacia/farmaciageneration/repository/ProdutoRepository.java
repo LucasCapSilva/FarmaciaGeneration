@@ -17,7 +17,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 	
 	public List<Produto> findAllByPrecoGreaterThanEqual (float preco);
 	
-	@Query(value = "SELECT * FROM blog_pessoal.tb_produto where ativo = :ativo", nativeQuery = true)
+	@Query(value = "SELECT * FROM tb_produto where ativo = :ativo", nativeQuery = true)
 	public List<Produto> findAllByAtivo(@Param("ativo") boolean ativo);	
 	
 	@Query(value = "select * from tb_produto inner join tb_marca on  tb_marca.id = tb_produto.marca_id where tb_marca.descricao = :marca", nativeQuery = true)
